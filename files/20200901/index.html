@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang = "pt-br">
+    <head>
+        <meta charset = "UTF-8"/>
+        <title>JSON - ATIVIDADE</title>
+
+        <style>
+            input{
+                width: 150px;
+                height: 25px;
+
+                border-radius: 5px;
+            }
+
+            ::placeholder{
+                color: #4DDBC4;
+            }
+
+            span{
+                color: red;
+            }
+        </style>
+
+        <script src = "js\jquery.min.js"></script>
+        <script>
+            var CEPMask = /^[0-9]{8}$/;
+
+            $(document).ready(function(){
+                $("input[name=CEP]").keyup(function(){
+                    var CEP = $("input[name=CEP]").val();
+
+                    if(CEP.length == 8){
+                        if(CEPMask.test(CEP)){
+                            $("#spanErrorCEP").html("");
+
+                            APICEP(CEP);
+                        }else{
+                            $("#spanErrorCEP").html("CEP Inválido!");
+                        }
+                    }
+                });
+            });
+
+            function APICEP(CEP){
+                var HTML = 'https://viacep.com.br/ws/' + CEP + '/json/unicode';
+
+                $.ajax({url: HTML, dataType: 'json',
+                    success: function(json){
+
+                        if(!("erro" in json)){
+                            $("input[name=Endereco]").val(json.logradouro);
+                            $("input[name=Bairro]").val(json.bairro);
+                            $("input[name=Cidade]").val(json.localidade);
+                            $("input[name=Estado]").val(json.uf);
+
+                            $("input[name=Numero]").focus();
+                        }else{
+                            $("#spanErrorCEP").html("CEP não encontrado!");
+
+                            $("input[name=Endereco]").val("");
+                            $("input[name=Bairro]").val("");
+                            $("input[name=Cidade]").val("");
+                            $("input[name=Estado]").val("");
+
+                            $("input[name=Numero]").val("");
+                        }
+                    }
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <form>
+            <table>
+                <tr>
+                    <td>
+                        <input name = "CEP" type = "text" placeholder = "CEP..."/>
+                        <span id = "spanErrorCEP"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input name = "Endereco" type = "text" placeholder = "Endereço..." disabled="disabled"/>
+                        <input name = "Numero" type = "text" placeholder = "Número..."/>
+                        <input name = "Bairro" type = "text" placeholder = "Bairro..." disabled="disabled"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input name = "Cidade" type = "text" placeholder = "Cidade..." disabled="disabled"/>
+                        <input name = "Estado" type = "text" placeholder = "Estado..." disabled="disabled"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
