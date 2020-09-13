@@ -45,6 +45,7 @@
                         $("#informacoesTabela").html('');
 
                         var HTML = 'https://servicodados.ibge.gov.br/api/v1/localidades/distritos/';
+                        var encontrou = false;
 
                         //Roda as cidades
                         for(i = 0; i < 10496; i++){ // Roda o vetor
@@ -56,6 +57,7 @@
                             var idEstado = id[0] + id[1];
 
                             if(nome.includes(stringCidade)){
+                                encontrou = true;
                                 var HTML = $("#informacoesTabela").html();
 
                                 for(j = 0; j < 27; j++){
@@ -69,6 +71,10 @@
                                 HTML = HTML + "<tr><td>" + nome + "</td><td>" + siglaEstado.toUpperCase() + "</td></tr>";
 
                                 $("#informacoesTabela").html(HTML);
+                            }
+
+                            if(!encontrou){
+                                $("#informacoesTabela").html("<td>Não foi encontrado nenhuma cidade...</td>");
                             }
                         }
                     }
