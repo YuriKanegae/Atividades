@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang = "pt-br">
+    <head>
+        <meta charset = "UTF-8"/>
+
+        <title>Atividade 1° Bimestre - Grupo B</title>
+
+        <script src = "js\jquery.min.js"></script>
+        <script>
+
+            $(document).ready(function(){
+                //Salva as cidades
+                var vetorCidades;
+
+                var HTML = 'https://servicodados.ibge.gov.br/api/v1/localidades/distritos/';
+                $.ajax({url: HTML, dataType: 'json',
+                    success: function(cidades){
+                        vetorCidades = cidades;
+                        console.log(cidades)
+                    }
+                });
+
+                //Sal os estados
+                var vetorEstados;
+
+                var HTMLEstado = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados/';
+                $.ajax({url: HTMLEstado, dataType: 'json',
+                    success: function(estado){
+                        vetorEstados = estado;
+                    }
+                });
+
+                //Ao digitar no input
+                $("input[name=stringCidade]").keyup(function(){
+                    var stringCidade = $("input[name=stringCidade]").val();
+                    var stringCidade = stringCidade.toUpperCase();
+
+                    if(stringCidade.length == 1){//Caso seja uma letra
+                        $("#informacoesTabela").html("<td>Digite ao menos 2 caracteres para sua busca.</td>");
+
+                    }else if(stringCidade.length == 0){
+                        $("#informacoesTabela").html("<td>Digite o nome da cidade que deseja procurar informações...</td>");
+                    }
+                    else{//Caso seja mais de uma letra
+                        $("#informacoesTabela").html('');
+
+                        var HTML = 'https://servicodados.ibge.gov.br/api/v1/localidades/distritos/';
+
+                        //Roda as cidades
+                        for(i = 0; i < 10496; i++){ // Roda o vetor
+                            var objeto = vetorCidades[i];
+                            var nome = objeto.nome.toUpperCase();
+
+                            var id = objeto.id;
+                            var id = id.toString();
+                            var idEstado = id[0] + id[1];
+
+                            if(nome.includes(stringCidade)){
+                                var HTML = $("#informacoesTabela").html();
+
+                                for(j = 0; j < 27; j++){
+                                    estado = vetorEstados[j];
+
+                                    if(estado.id.toString() == idEstado){
+                                        siglaEstado = estado.sigla;
+                                    }
+                                };
+
+                                HTML = HTML + "<tr><td>" + nome + "</td><td>" + siglaEstado.toUpperCase() + "</td></tr>";
+
+                                $("#informacoesTabela").html(HTML);
+                            }
+                        }
+                    }
+                });
+            });
+
+        </script>
+    </head>
+    <body>
+        <input type ="text" name = "stringCidade" placeholder = "digite a cidade a procurar..."/>
+        <hr/>
+
+        <table id = "tabela" border = "1">
+            <tr id = "informacoesTabela">
+                <td>Digite o nome da cidade que deseja procurar informações...</td>
+            </tr>
+        </table>
+    </body>
+</html>
