@@ -16,14 +16,40 @@
 
         <div class = "container">
             <form action = "listaGenero.php" method = "POST">
-                <input class = "form-control" type = "text" name = "nomeGenero" placeholder = "Nome do Gênero"/>
-                <button class = "btn btn-primary"/>Procurar gênero</button>
-            </form><br/>
-
-            <table class = "table">
-                <thead>
+                <div class="row text-center">
+                    <div class="col">
+                        <h3>Lista de Gêneros</h3>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-3">
+                        Filtrar pelo nome do Gênero:
+                    </div>
+                    <br>
+                    <div class="col">
+                        <input class = "form-control" type = "text" name = "nomeGenero" placeholder = "Nome do Gênero"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1">
+                        <button class = "btn btn-primary" type="submit">Filtrar</button>
+                    </div>
+                    <div class="col">
+                        <a class = "btn btn-secondary" href="listaGenero.php" role="button">Limpar Filtro</a>
+                    </div>
+                </div>
+            </form>
+            <br>
+            <table class = "table text-center table-striped">
+                <thead class="thead-dark">
                     <tr>
-                        <th>Nome do gênero</th>
+                        <th></th>
+                        <th></th>
+                        <th>#</th>
+                        <th>Gêneros</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,12 +66,18 @@
                         }
                         $query .= " order by genero.nome;";
 
-
+                        $i=0;
                         $resultados = mysqli_query($conexao, $query) or die ($query);
                         while($linha = mysqli_fetch_assoc($resultados)){
+                            $i++;
                             echo "
                                 <tr>
+                                <th></th>
+                                    <td></td>
+                                    <th>". $i ."</th>
                                     <td>". $linha["nomeGenero"] ."</td>
+                                    <td></td>
+                                    <th></th>
                                 </tr>
                             ";
 

@@ -1,4 +1,4 @@
-<nav class = "navbar navbar-expand-lg navbar-light bg-light rounded">
+<nav class = "navbar navbar-expand-lg  navbar-dark bg-dark rounded">
     <div class = "container">
 
         <!--Título-->
@@ -34,5 +34,8 @@
                 </li>
             </ul>
         </div>
+        <span class="navbar-text">
+        Music Player
+        </span>
     </div>
 </nav><br/><br/>

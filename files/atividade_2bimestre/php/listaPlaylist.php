@@ -13,23 +13,44 @@
         <?php include "../inc/cabecalho.inc";?>
 
         <div class = "container">
+            <div class="row text-center">
+                <div class="col">
+                    <h3>Lista de Playlists</h3>
+                </div>
+            </div>
+            <br>
             <form action = "listaPlaylist.php" method = "POST">
-                <select class = "form-control" name = "IDPlaylist">
-                    <option value = "">::Selecione uma playlist::</option>
-                    <?php
-                        include "conexao.php";
+                <div class="row text-center">
+                    <div class="col-3">
+                        Filtrar pela playlist:
+                    </div>
+                    <div class="col">
+                        <select class = "form-control" name = "IDPlaylist">
+                            <option value = "">Selecione uma playlist</option>
+                            <?php
+                                include "conexao.php";
 
-                        $query = "select playlist.id_playlist as ID, playlist.nome as nomePlaylist from playlist";
-                        $resultados = mysqli_query($conexao, $query) or die ($query);
+                                $query = "select playlist.id_playlist as ID, playlist.nome as nomePlaylist from playlist";
+                                $resultados = mysqli_query($conexao, $query) or die ($query);
 
-                        while($linha = mysqli_fetch_assoc($resultados)){
-                            echo "<option value = '". $linha["ID"] ."'>". $linha["nomePlaylist"] ."</option>";
-                        }
-                    ?>
-                </select>
-                <button class = "btn btn-primary">Procurar Gênero</button>
+                                while($linha = mysqli_fetch_assoc($resultados)){
+                                    echo "<option value = '". $linha["ID"] ."'>". $linha["nomePlaylist"] ."</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-1">
+                        <button class = "btn btn-primary" type="submit">Filtrar</button>
+                    </div>
+                    <div class="col">
+                        <a class = "btn btn-secondary" href="listaPlaylist.php" role="button">Limpar Filtro</a>
+                    </div>
+                </div>
             </form>
-
+            <br>
             <?php
                 include "conexao.php";
 
@@ -47,10 +68,16 @@
                 while($linha = mysqli_fetch_assoc($resultados)){
                     $nomePlaylist = $linha["nomePlaylist"];
 
-                    echo "<h1>". $nomePlaylist ."</h1><br/>";
+                    echo "<hr/>
+                        <div class='row text-center'>
+                            <div class='col'>
+                                <h4>". $nomePlaylist ."</h4>
+                            </div>
+                        </div>
+                    ";
                     $query2 = "select musica_playlist.cod_musica as codMusica from musica_playlist where musica_playlist.cod_playlist = ". $linha["IDPlaylist"];
                     $resultados2 = mysqli_query($conexao, $query2) or die ($query2);
-
+                    echo '<div class="row text-center">';
                     while($linha2 = mysqli_fetch_assoc($resultados2)){
                         $codMusica = $linha2["codMusica"];
 
@@ -58,9 +85,16 @@
                         $resultados3 = mysqli_query($conexao, $query3);
                         $resultados3 = mysqli_fetch_row($resultados3);
 
-                        echo $resultados3["0"] . " - " . $resultados3["3"] . " - " . $resultados3["2"]. "<br/>";
-                        echo '<iframe width="1158" height="651" src="https://www.youtube.com/embed/'. $resultados3[1] .'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br/>';
+                        echo "
+                                <div class='col'>
+                                    <b>Música: </b>".$resultados3["0"] . " - " . $resultados3["3"] . " - " . $resultados3["2"]. "<br>
+                        ";
+                        echo '
+                                    <iframe width="533" height="300" src="https://www.youtube.com/embed/'. $resultados3[1] .'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                        ';
                     }
+                    echo '</div>';
                 }
             ?>
         </div>

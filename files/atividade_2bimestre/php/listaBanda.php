@@ -13,30 +13,65 @@
         <?php include "../inc/cabecalho.inc";?>
 
         <div class = "container">
+            <div class="row text-center">
+                <div class="col">
+                    <h3>Lista de Bandas</h3>
+                </div>
+            </div>
+            <br>
             <form action = "listaBanda.php" method = "POST">
-                <select class = "form-control" name = "IDGenero">
-                    <option value = "">::Selecione um genêro::</option>
-                    <?php
-                        include "conexao.php";
+                <div class="row text-center">
+                    <div class="col-3">
+                        Filtrar pelo gênero:
+                    </div>
+                    <div class="col">
+                        <select class = "form-control" name = "IDGenero">
+                            <option value = "">Selecione um genêro</option>
+                            <?php
+                                include "conexao.php";
 
-                        $query = "select genero.id_genero as ID, genero.nome as nomeGenero from genero";
-                        $resultados = mysqli_query($conexao, $query) or die ($query);
+                                $query = "select genero.id_genero as ID, genero.nome as nomeGenero from genero";
+                                $resultados = mysqli_query($conexao, $query) or die ($query);
 
-                        while($linha = mysqli_fetch_assoc($resultados)){
-                            echo "<option value = '". $linha["ID"] ."'>". $linha["nomeGenero"] ."</option>";
-                        }
-                    ?>
-                </select>
-
-                <input class = "form-control" type = "text" name = "nomeBanda" placeholder = "Nome da Banda"/>
-                <button class = "btn btn-danger">Filtrar</button>
-            </form><br/>
-
-            <table class = "table">
-                <thead>
+                                while($linha = mysqli_fetch_assoc($resultados)){
+                                    echo "<option value = '". $linha["ID"] ."'>". $linha["nomeGenero"] ."</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row text-center">
+                    <div class="col-3">
+                        Filtrar pela banda:
+                    </div>
+                    <div class="col">
+                        <input class = "form-control" type = "text" name = "nomeBanda" placeholder = "Nome da Banda"/>
+                    </div>
+                    <br/>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-1">
+                        <button class = "btn btn-primary" type="submit">Filtrar</button>
+                    </div>
+                    <div class="col">
+                        <a class = "btn btn-secondary" href="listaBanda.php" role="button">Limpar Filtro</a>
+                    </div>
+                </div>
+            </form>
+            <br>
+            <table class = "table text-center table-striped">
+                <thead class="thead-dark">
                     <tr>
+                        <th></th>
+                        <th></th>
+                        <th>#</th>
                         <th>Nome da banda</th>
                         <th>Gênero</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,12 +93,19 @@
                         $query .= " order by banda.nome";
 
                         $resultados = mysqli_query($conexao, $query) or die ($query);
-
+                        $i=0;
                         while($linha = mysqli_fetch_assoc($resultados)){
+                            $i++;
                             echo "
                                 <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th>".$i."</th>
                                     <td>". $linha["nomeBanda"] ."</td>
                                     <td>". $linha["nomeGenero"]."</td>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
                             ";
                         }

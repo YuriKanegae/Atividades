@@ -13,22 +13,51 @@
         <?php include "../inc/cabecalho.inc";?>
 
         <div class = "container">
+            <div class="row text-center">
+                <div class="col">
+                    <h3>Cadastro de Bandas</h3>
+                    <br>
+                </div>
+            </div>
             <form action = "formBanda.php" method = "POST">
-                <input class = "form-control" type = "text" name = "nomeBanda" placeholder = "Nome da Banda..."/>
-                <select class = "form-control" name = "IDGenero">
-                    <?php
-                        include "conexao.php";
+                <div class="row">
+                    <div class="col-1">
+                        Nome:
+                    </div>
+                    <div class="col">
+                        <input class = "form-control" type = "text" name = "nomeBanda" placeholder = "Nome da Banda..."/>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-1">
+                        Gênero:
+                    </div>
+                    <div class="col">
+                        <select class = "form-control" name = "IDGenero">
+                            <option value="">Gênero da Banda</option>
+                            <?php
+                                include "conexao.php";
 
-                        $query = "select genero.id_genero as ID, genero.nome as nomeGenero from genero";
-                        $resultados = mysqli_query($conexao, $query) or die ($query);
+                                $query = "select genero.id_genero as ID, genero.nome as nomeGenero from genero";
+                                $resultados = mysqli_query($conexao, $query) or die ($query);
 
-                        while($linha = mysqli_fetch_assoc($resultados)){
-                            echo "<option value = '". $linha["ID"] ."'>". $linha["nomeGenero"] ."</option>";
-                        }
-                    ?>
-                </select>
-
-                <button class = "btn btn-primary">Cadastrar Banda</button>
+                                while($linha = mysqli_fetch_assoc($resultados)){
+                                    echo "<option value = '". $linha["ID"] ."'>". $linha["nomeGenero"] ."</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-2">
+                        <button class = "btn btn-primary">Cadastrar Banda</button>
+                    </div>
+                    <div class="col">
+                        <button class = "btn btn-secondary" type="reset">Limpar Campos</button>
+                    </div>
+                </div>
             </form>
             <?php
                 if(!empty($_POST)){
@@ -39,7 +68,12 @@
                         $query = "insert into banda(nome, cod_genero) values('$nomeBanda', $IDGenero)";
                         mysqli_query($conexao, $query) or die($query);
 
-                        echo "<h1>cadastrado com sucesso!</h1>";
+                        echo "<div class='alert alert-success' role='alert'>
+                                Banda cadastrada com sucesso!
+                            </div>
+                        ";
+                    }else{
+                        echo "<div class='alert alert-warning' role='alert'>Preencha todos os campos!</div>";
                     }
                 }
             ?>

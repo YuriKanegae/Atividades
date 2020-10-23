@@ -13,12 +13,33 @@
         <?php include "../inc/cabecalho.inc";?>
 
         <div class = "container">
+            <div class="row text-center">
+                <div class="col">
+                    <h3>Cadastro de Gêneros</h3>
+                    <br>
+                </div>
+            </div>
             <?php
                 if(empty($_POST)){
                     echo '
                         <form action = "formGenero.php" method = "POST">
-                            <input class = "form-control" type = "text" name = "nomeGenero" placeholder = "Nome do Gênero"/>
-                            <button class = "btn btn-primary"/>Cadastrar Gênero</button>
+                            <div class="row">
+                                <div class="col-1">
+                                    Nome:
+                                </div>
+                                <div class="col">
+                                    <input class = "form-control" type = "text" name = "nomeGenero" placeholder = "Nome do Gênero"/>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-2">
+                                    <button class = "btn btn-primary" type="submit">Cadastrar Gênero</button>
+                                </div>
+                                <div class="col">
+                                    <button class = "btn btn-secondary" type="reset">Limpar Campos</button>
+                                </div>
+                            </div>
                         </form>
                     ';
                 }else{
@@ -32,9 +53,12 @@
                         mysqli_query($conexao, $query)
                             or die($query);
 
-                        echo "<h1>Cadastrado com sucesso!</h1>";
+                        echo "<div class='alert alert-success' role='alert'>
+                                Gênero cadastrado com sucesso!
+                            </div>
+                        ";
                     }else{
-                        echo "<h1>Input vazio!</h1>";
+                        echo "<div class='alert alert-warning' role='alert'>Preencha todos os campos!</div>";
                     }
                 }
             ?>
