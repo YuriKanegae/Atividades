@@ -1,0 +1,17 @@
+usuario Não logado:
+    - Fazer login
+    - Fazer cadastro de usuário
+    - Fazer cadastro de empresa
+
+Usuario logado:
+    - Ver categorias
+    - Ver nichos
+    - Ver produtos
+
+Usuario empresa:
+    - Ver categorias
+    - Ver nichos
+    - Ver os seus produtos
+    - Cadastrar produtos, nichos e categorias
+    - Editar seus produtos e precos
+    - Excluir seus produtos
