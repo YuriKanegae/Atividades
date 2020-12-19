@@ -2,7 +2,7 @@
 
     $host = "db4free.net";
     $port = "3306";
-    $db = "precos";
+    $db = "checaprecos794";
     $user = "yurikanegae";
     $senha = "yuri1890794";
 
