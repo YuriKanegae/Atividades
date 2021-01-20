@@ -7,7 +7,7 @@
 ?>
 
 <html lang = "pt-br">
-    <header>
+    <head>
         <meta charset = "UTF-8"/>
 
         <title>Página de index</title>
@@ -17,7 +17,7 @@
                 window.location.href = 'logout.php';
             }
         </script>
-    </header>
+    </head>
     <body onload = "setTimeout('logout()', 60000);">
         <header>
             <h1>Olá</h1>

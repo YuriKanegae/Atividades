@@ -43,7 +43,7 @@
     }
 ?>
 <html lang = "pt-br">
-    <header>
+    <head>
         <meta charset = "UTF-8"/>
 
         <title>Página de login</title>
@@ -61,7 +61,7 @@
                 });
             });
         </script>
-    </header>
+    </head>
     <body>
         <main>
             <form id = "form" action = "login.php" method = "POST">
