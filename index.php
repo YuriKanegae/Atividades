@@ -84,7 +84,6 @@
         </style>
     </head>
     <body  class="d-flex flex-column">
-
         <div id = "page-content" >
             <div class = "container text-center">
                 <div class = "row justify-content-center">
