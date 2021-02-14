@@ -11,18 +11,21 @@
         <script src = '../js/popper.min.js'></script>
         <script src = '../js/bootstrap.min.js'></script>
         <script src = '../js/md5.js'></script>
+        <script src = '../js/login.js'></script>
 
-        <title>Faça o seu Login - Portal NEWS</title>
+        <title>Faça o seu Login ou Cadastro- Portal NEWS</title>
     </head>
-    <body>
+    <body onload = 'geraForm("login")'>
 
         <main>
             <div class = 'container'>
-                <form method = 'POST'>
-                    
+                <form method = 'POST' id = 'form' onsubmit = 'submitForm()'>
+
                 </form>
             </div>
         </main>
+
+
     </body>
 </html>
 <!--
