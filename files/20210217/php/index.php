@@ -9,4 +9,6 @@
         
         //header('Location: login.php');
     }
+
+    include 'rodape.php';
 ?>
