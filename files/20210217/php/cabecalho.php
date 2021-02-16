@@ -48,6 +48,7 @@
                 if(!isset($_SESSION['nome'])){
                   echo '
                     <a class = "mx-auto text-white" href = "login.php">Login</a>
+                    <a class = "mx-auto text-white" href = "#">Cadastrar</a>
                   ';
                 }else{
                   echo '
