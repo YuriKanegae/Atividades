@@ -21,4 +21,4 @@ create table administrador(
 
 insert into administrador (nome, email, senha, permissao) values
     ('Administrador 1', 'adm_1@mail.com', 'e00cf25ad42683b3df678c61f42c6bda', 'baixa'),
-    ('Administrador 2', 'adm_2@mail.com', 'c84258e9c39059a89ab77d846ddab909', 'alta'),
+    ('Administrador 2', 'adm_2@mail.com', 'c84258e9c39059a89ab77d846ddab909', 'alta');
