@@ -6,11 +6,13 @@
         <meta name = 'viewport' content = 'width=device-width, initial-scale=1'/>
 
         <link rel = 'stylesheet' href = '../css/bootstrap.min.css'/>
-        <link rel = 'stylesheet' href = '../css/estilo.css'/>
+        <link rel = 'stylesheet' href = '../css/bootstrap.css'/>
+        <link rel = 'stylesheet' href = '../css/w3.css'/>
 
         <script src = '../js/jquery-3.5.1.min.js'></script>
         <script src = '../js/popper.min.js'></script>
         <script src = '../js/bootstrap.min.js'></script>
+        <script src = '../js/bootstrap.js'></script>
         <script src = '../js/md5.js'></script>
     		<noscript>Seu navegador não suporta JavaScript</noscript>
 
@@ -28,7 +30,7 @@
           <!--Elementos centrais-->
           <ul class = "navbar-nav ml-auto">
             <li class = "nav-item text-white">
-              Portal NEWS
+              <a class = "mx-auto text-white" href = "index.php">Portal NEWS</a>
             </li>
           </ul>
 
@@ -45,11 +47,11 @@
               <?php
                 if(!isset($_SESSION['nome'])){
                   echo '
-                    <a class = "mx-auto" href = "login.php">Login</a>
+                    <a class = "mx-auto text-white" href = "login.php">Login</a>
                   ';
                 }else{
                   echo '
-                    <a class = "mx-auto" href = "logout.php">Logout</a>
+                    <a class = "mx-auto text-white" href = "logout.php">Logout</a>
                   ';
                 }
               ?>
