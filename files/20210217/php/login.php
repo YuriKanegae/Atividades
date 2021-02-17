@@ -1,3 +1,10 @@
+<?php
+    session_start();
+
+    if(isset($_SESSION["nome"])){
+        header('Location: home.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang = "pt-br">
     <head>
@@ -11,21 +18,29 @@
         <script src = '../js/popper.min.js'></script>
         <script src = '../js/bootstrap.min.js'></script>
         <script src = '../js/md5.js'></script>
+        <script src = '../js/validadorCPF.js'></script>
         <script src = '../js/login.js'></script>
 
         <title>Faça o seu Login ou Cadastro- Portal NEWS</title>
+
+        <style>
+            html, body{
+                height: 100%;
+            }
+            form{
+                border: 1px solid;
+                border-radius: 10px;
+            }
+        </style>
     </head>
     <body onload = 'geraForm("login")'>
-
-        <main>
-            <div class = 'container'>
-                <form method = 'POST' id = 'form' onsubmit = 'submitForm()'>
-
+        <?php include "cabecalho.php"?>
+        <div class = 'container h-100'>
+            <div class = 'row h-100 justify-content-center align-items-center'>
+                <form class = 'col-4' method = 'POST' id = 'form' onsubmit = 'submitForm()'>
                 </form>
             </div>
-        </main>
-
-
+        </div>
     </body>
 </html>
 <!--

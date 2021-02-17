@@ -14,13 +14,13 @@
       $valorCookie = base64_encode(1);
       $_SESSION['valorCookie']=1;
       echo '1';
-    }else{
+  }else if(!isset($_SESSION["nome"])){
       $valorCookie=base64_decode($_COOKIE[$cookie])+1;
       $_SESSION['valorCookie']=$valorCookie;
       $valorCookie=base64_encode($valorCookie);
     }
 
     setcookie($cookie, $valorCookie, $validadeCookie, $caminhoCookie, $dominioCookie, $seguroCookie, $httpCookie);
-    
+
     header('Location: noticia.php');
 ?>

@@ -39,7 +39,7 @@
             <span class = "navbar-toggler-icon"></span>
           </button>
         </div>
-        
+
         <!--Terceiro item da ordem - Elementos que estão a direita-->
         <div class = "navbar-collapse collapse w-100 order-3 dual-collapse2">
           <ul class = "navbar-nav ml-auto">
@@ -47,11 +47,11 @@
               <?php
                 if(!isset($_SESSION['nome'])){
                   echo '
-                    <a class = "mx-auto text-white" href = "login.php">Login</a>
-                    <a class = "mx-auto text-white" href = "#">Cadastrar</a>
+                    <a class = "mx-auto text-white" href = "login.php">Login ou Cadastrar</a>
                   ';
                 }else{
                   echo '
+                    <a class = "mx-auto text-white" href = "home.php">Home</a>  |
                     <a class = "mx-auto text-white" href = "logout.php">Logout</a>
                   ';
                 }

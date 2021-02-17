@@ -6,10 +6,10 @@
 
     $nomeCookie = COOKIE;
     $cookie = base64_decode($_COOKIE[$nomeCookie]);
-    if(!isset($_SESSION['valorCookie'])){
+    if(!isset($_SESSION['valorCookie']) && !isset($_SESSION["nome"])){
       header('Location: gravar_cookie.php');
-    }else if($cookie>5){
-?>
+  }else if($cookie>5){
+      echo '
     <button type="button" id="botao" class="btn btn-primary" data-toggle="modal" data-target="#modal" style="display:block;"></button>
 
     <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -32,13 +32,13 @@
           $("#modal").modal("show");
       });
 
-      $('#modal').modal({
-        backdrop: 'static', keyboard: false
+      $(\'#modal\').modal({
+        backdrop: \'static\', keyboard: false
       });
     </script>
-<?php
+    ';
     }else{
-?>
+        echo'
 
       <h1 class="text-center">Lorem ipsum cursus venenatis</h1>
       <div class="container">
@@ -49,8 +49,7 @@
           </div>
         </div>
       </div>
-
-<?php
+      ';
     }
 
     include 'rodape.php';
